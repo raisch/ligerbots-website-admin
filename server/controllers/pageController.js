@@ -1,6 +1,11 @@
+const path = require('node:path')
+const { writeFile } = require('node:fs/promises')
+
+const { mkdirp } = require('mkdirp')
+const markdown = require('markdown').markdown
 const mongoose = require('mongoose')
 
-const { title, description } = require('../config')
+const { title, description, paths } = require('../config')
 
 const Page = require('../models/Page')
 
@@ -146,4 +151,55 @@ exports.update = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
+}
+
+exports.publish = async (req, res) => {
+  const pageId = req.params.id
+
+  console.log(`retrieving page with id ${pageId}`)
+  let page
+  try {
+    page = await Page.findOne({ _id: pageId })
+  } catch (err) {
+    await req.flash(
+      'error',
+      `Failed to retrieve page with id: "${pageId}": ${err}`
+    )
+    await res.redirect('/pages')
+    return
+  }
+
+  let pagePath = path.join(paths.static, '.', page.path)
+  console.log(`pagePath: ${pagePath}`)
+
+  let content
+  try {
+    content = markdown.toHTML(page.content)
+  } catch (err) {
+    await req.flash(
+      'error',
+      `Failed to convert markdown for page at "${page.path}": ${err}`
+    )
+    await res.redirect('/pages')
+    return
+  }
+
+  pagePath += '.html'
+  console.log(`writing ${content.length} bytes to ${pagePath}`)
+  // const writer = createWriteStream(pagePath)
+
+  try {
+    await mkdirp(path.dirname(pagePath))
+    await writeFile(pagePath, content)
+  } catch (err) {
+    await req.flash(
+      'error',
+      `Failed to write html for page at "${page.path}": ${err}`
+    )
+    await res.redirect('/pages')
+    return
+  }
+
+  await req.flash('info', `Page published to "${page.path}.html"`)
+  await res.redirect('/pages')
 }

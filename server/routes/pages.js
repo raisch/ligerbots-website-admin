@@ -27,6 +27,8 @@ router.get('/', controller.main)
 // NOTE: MUST COME BEFORE /pages/:id
 router.get('/new', controller.new)
 
+router.post('/:id/publish', controller.publish)
+
 // GET pages/:id - show user
 router.get('/:id', controller.show)
 

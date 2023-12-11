@@ -45,21 +45,6 @@ app.set('view engine', 'ejs')
 
 // Logging
 app.use(logger)
-// app.use((req, res, next) => {
-//   res.on('finish', function () {
-//     const now = new Date()
-//     console.log(
-//       now.toISOString(),
-//       req.method,
-//       decodeURI(req.url),
-//       res.statusCode,
-//       res.statusMessage,
-//       req.ip
-//     )
-//     logger.info(`${req.method} ${req.url}`)
-//   })
-//   next()
-// })
 
 // Routes
 app.use('/', require('./routes/main'))

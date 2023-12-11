@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const MONGODB_URI = 'mongodb://localhost/ligerbots-admin'
+const MONGODB_URI = process.env.MONGODB_URI 
 
 const connectDB = async () => {
   console.log(`connecting to ${MONGODB_URI}`)

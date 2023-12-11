@@ -34,7 +34,11 @@
     <tbody>
       <% pages.forEach(element => { %>
       <tr class="align-middle">
-        <td><%= element.path %></td>
+        <td>
+          <a href="/_pages/<%= element.path %>.html" target="_blank"
+            ><%= element.path %></a
+          >
+        </td>
         <td><%= element.author %></td>
         <td class="text-end">
           <div class="d-flex flex-row justify-content-end gap-2">
@@ -54,13 +58,15 @@
               <i class="bi bi-pencil"></i>
             </a>
 
-            <a
-              href="/pages/<%= element._id %>/publish"
-              type="button"
-              class="btn btn-success btn-small"
+            <form
+              action="/pages/<%= element._id %>/publish"
+              method="POST"
+              class="position-relative"
             >
-              <i class="bi bi-box-arrow-up-right"></i>
-            </a>
+              <button type="submit" class="btn btn-success btn-small">
+                <i class="bi bi-box-arrow-up-right"></i>
+              </button>
+            </form>
           </div>
         </td>
       </tr>
