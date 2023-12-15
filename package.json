@@ -4,7 +4,7 @@
   "description": "Admin Interface for the Ligerbots Website NG",
   "main": "index.js",
   "engines": {
-    "node": "20.9.0",
+    "node": "20.8.0",
     "npm": "10.1.0"
   },
   "scripts": {

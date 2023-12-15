@@ -155,7 +155,7 @@ exports.update = async (req, res) => {
 
 exports.publish = async (req, res) => {
   const pageId = req.params.id
-
+  let useHtml = req.params.useHtml
   console.log(`retrieving page with id ${pageId}`)
   let page
   try {
@@ -168,11 +168,13 @@ exports.publish = async (req, res) => {
     await res.redirect('/pages')
     return
   }
-
+//this is going to need a whitespace slurper 
   let pagePath = path.join(paths.static, '.', page.path)
   console.log(`pagePath: ${pagePath}`)
 
   let content
+  
+  if (useHtml = false) {
   try {
     content = markdown.toHTML(page.content)
   } catch (err) {
@@ -183,7 +185,17 @@ exports.publish = async (req, res) => {
     await res.redirect('/pages')
     return
   }
+  }
+  else {
+    try {content = page.content
+    } catch (err) {
+      await req.flash('error')
+      await res.redirect('/pages')
+      return
+    }
 
+
+}
   pagePath += '.html'
   console.log(`writing ${content.length} bytes to ${pagePath}`)
   // const writer = createWriteStream(pagePath)
