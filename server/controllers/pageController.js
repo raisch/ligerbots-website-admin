@@ -155,7 +155,7 @@ exports.update = async (req, res) => {
 
 exports.publish = async (req, res) => {
   const pageId = req.params.id
-  let useHtml = req.params.useHtml
+  let useHtml = req.body.useHtml
   console.log(`retrieving page with id ${pageId}`)
   let page
   try {
