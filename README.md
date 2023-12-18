@@ -10,7 +10,7 @@
 Create a server/.env file to store your credentials. Example below:
 
 ```bash
-MONGODB_URI = mongodb://localhost/ligerbots-admin
+MONGODB_URI=mongodb://localhost/ligerbots-admin
 ```
 
 ## Installation

@@ -4,7 +4,7 @@
   "description": "Admin Interface for the Ligerbots Website NG",
   "main": "index.js",
   "engines": {
-    "node": "20.9.0",
+    "node": "20",
     "npm": "10.1.0"
   },
   "scripts": {
@@ -31,6 +31,11 @@
     "winston": "^3.11.0"
   },
   "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
     "nodemon": "^2.0.21"
   }
 }
