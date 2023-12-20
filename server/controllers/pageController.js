@@ -66,7 +66,8 @@ exports.save = async (req, res) => {
   const newPage = new Page({
     path: req.body.path,
     author: req.body.author,
-    content: req.body.content
+    content: req.body.content,
+    usesHtml: req.body.usesHtml
   })
 
   try {
@@ -144,6 +145,7 @@ exports.update = async (req, res) => {
       path: req.body.path,
       author: req.body.author,
       content: req.body.content,
+      usesHtml: req.body.usesHtml,
       updatedAt: Date.now()
     })
     await req.flash('info', 'Page updated.')

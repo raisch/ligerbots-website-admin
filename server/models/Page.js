@@ -14,6 +14,10 @@ const PageSchema = new Schema({
     type: String,
     required: true
   },
+  usesHtml: {
+    type: Boolean,
+    default: false
+  },
   isPublished: {
     type: Boolean,
     default: false
