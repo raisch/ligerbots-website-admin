@@ -43,7 +43,14 @@
   <li class="list-group-item">
     <div class="row">
       <div class="col" style="max-width: 140px"><b>Name:</b></div>
-      <div class="col"><%= user.firstName %> <%= user.lastName %></div>
+      <div class="col"><%= user.fullName %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col" style="max-width: 140px"><b>Username:</b></div>
+      <div class="col"><%= user.username %></div>
     </div>
   </li>
 
@@ -77,8 +84,8 @@
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Details:</b></div>
-      <div class="col"><%= user.details %></div>
+      <div class="col" style="max-width: 140px"><b>Notes:</b></div>
+      <div class="col"><%= user.notes %></div>
     </div>
   </li>
 
