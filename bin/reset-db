@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mongosh --eval 'use ligerbots-admin' --eval 'db.dropDatabase()'
