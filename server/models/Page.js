@@ -10,6 +10,10 @@ const PageSchema = new Schema({
     type: String,
     required: true
   },
+  attributes: {
+    type: Object,
+    required: false
+  },
   content: {
     type: String,
     required: true

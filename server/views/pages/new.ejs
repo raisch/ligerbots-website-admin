@@ -1,6 +1,4 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
->
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Page</h1>
   <div class="btn-toolbar mb-2 mb-md 0">
     <div class="btn-group me-2">
@@ -27,44 +25,30 @@
   <div class="row form-group mb-4">
     <div class="col">
       <label for="name">Path</label>
-      <input
-        type="text"
-        class="form-control"
-        id="path"
-        name="path"
-        value=""
-        placeholder="Path from site root."
-        required
-      />
+      <input type="text" class="form-control" id="path" name="path" value="" placeholder="Path from site root." required />
     </div>
 
     <div class="col">
       <label for="author">Author</label>
-      <input
-        type="text"
-        class="form-control"
-        id="author"
-        name="author"
-        value=""
-        placeholder="Author Name"
-        required
-      />
+      <input type="text" class="form-control" id="author" name="author" value="" placeholder="Author Name" required />
     </div>
   </div>
 
   <div class="form-group mb-4">
     <label for="content">Content</label>
-    <textarea
-      class="form-control"
-      name="content"
-      id="content"
-      cols="30"
-      rows="12"
-      placeholder="Content will be surrounded by site layout."
-    ></textarea>
+    <textarea class="form-control" name="content" id="content" cols="30" rows="12" placeholder="Content will be surrounded by site layout."></textarea>
   </div>
 
   <div class="form-group mb-4">
     <button type="submit" class="btn btn-primary">Add Page</button>
   </div>
 </form>
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+<script>
+  var simplemde = new SimpleMDE({
+    element: document.getElementById("content"),
+  });
+  simplemde.value(``);
+</script>

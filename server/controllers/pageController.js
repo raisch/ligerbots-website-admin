@@ -3,7 +3,7 @@ const { writeFile } = require('node:fs/promises')
 
 const { mkdirp } = require('mkdirp')
 const markdown = require('markdown').markdown
-const mongoose = require('mongoose')
+const fm = require('front-matter')
 
 const { title, description, paths } = require('../config')
 
@@ -63,10 +63,13 @@ exports.new = async (req, res) => {
 exports.save = async (req, res) => {
   console.log(req.body)
 
+  const content = fm(req.body.content)
+
   const newPage = new Page({
     path: req.body.path,
     author: req.body.author,
-    content: req.body.content
+    content: content.body,
+    attributes: content.attributes || {}
   })
 
   try {
