@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const type = 'main'
-
-const controller = require(`../controllers/${type}Controller`)
+const controller = require('../controllers/main')
 
 /**
  *  Page Routes

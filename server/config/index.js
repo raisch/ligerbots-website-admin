@@ -4,7 +4,8 @@ module.exports = {
   title: 'Admin',
   description: 'Ligerbots Admin Management System',
   schools: ['north', 'south', 'none'],
-  roles: ['student', 'coach', 'mentor', 'parent', 'other'],
+  types: ['student', 'coach', 'mentor', 'parent', 'other'],
+  roles: ['user', 'editor', 'admin', 'root'],
   defaults: {
     school: 'none',
     role: 'student'

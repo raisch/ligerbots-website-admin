@@ -1,24 +1,32 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const { schools, roles } = require('../config')
+const { _ } = require('../lib/utils')
+const { schools, roles, types } = require('../config')
 
 const UserSchema = new Schema({
-  firstName: {
+  username: {
     type: String,
+    unique: true,
     required: true
   },
+  password: {
+    type: String,
+    minlength: 8,
+    required: true
+  },
+  firstName: {
+    type: String
+  },
   lastName: {
+    type: String
+  },
+  fullName: {
     type: String,
     required: true
   },
   tel: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
+    type: String
   },
   school: {
     type: String,
@@ -27,7 +35,18 @@ const UserSchema = new Schema({
     enum: {
       values: schools,
       message: `School must be one of ${schools}`
-    }
+    },
+    default: 'none'
+  },
+  type: {
+    type: String,
+    required: true,
+    lowercase: true,
+    enum: {
+      values: types,
+      message: `Type must be one of ${types}`
+    },
+    default: 'other'
   },
   role: {
     type: String,
@@ -36,9 +55,10 @@ const UserSchema = new Schema({
     enum: {
       values: roles,
       message: `Role must be one of ${roles}`
-    }
+    },
+    default: 'user'
   },
-  details: {
+  notes: {
     type: String
   },
   active: {
@@ -53,6 +73,13 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now()
   }
+})
+
+UserSchema.pre('validate', function (next) {
+  if (_.isNonEmptyString(this.firstName) && _.isNonEmptyString(this.lastName)) {
+    this.fullName = `${this.firstName} ${this.lastName}`
+  }
+  next()
 })
 
 module.exports = mongoose.model('User', UserSchema)

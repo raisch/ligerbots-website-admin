@@ -1,5 +1,3 @@
-const mongoose = require('mongoose')
-
 const { title, description } = require('../config')
 
 /**
@@ -13,8 +11,10 @@ exports.main = async (req, res) => {
     description
   }
 
+  // if we don't yet have a jwt token, redirect to the login page
+
   try {
-    res.render(`index`, {
+    res.render('index', {
       locals,
       messages
     })
@@ -31,7 +31,7 @@ exports.about = async (req, res) => {
   const locals = { title, description }
 
   try {
-    res.render(`about`, {
+    res.render('about', {
       locals,
       messages
     })

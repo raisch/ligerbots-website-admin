@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/userController')
+const controller = require('../controllers/user')
+const { authenticate } = require('../middleware/auth')
 
 /**
  *  User Routes
@@ -28,7 +29,7 @@ router.get('/', controller.main)
 router.get('/new', controller.new)
 
 // POST /users - save user
-router.post('/', controller.save)
+router.post('/', authenticate, controller.save)
 
 // GET users/:id - show user
 router.get('/:id', controller.show)

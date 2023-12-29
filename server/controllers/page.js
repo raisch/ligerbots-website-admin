@@ -20,8 +20,8 @@ exports.main = async (req, res) => {
   const messages = await req.flash('info')
   const locals = { title, description, utils }
 
-  let perPage = 12
-  let pageNum = req.query.page || 1
+  const perPage = 12
+  const pageNum = req.query.page || 1
 
   try {
     const pages = await Page.aggregate([{ $sort: { path: 1 } }])

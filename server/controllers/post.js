@@ -1,5 +1,3 @@
-const mongoose = require('mongoose')
-
 const { title, description } = require('../config')
 const Post = require('../models/Post')
 
@@ -40,7 +38,6 @@ exports.new = async (req, res) => {
  * Create New Post
  */
 exports.save = async (req, res) => {
-
   const newPost = new Post({
     firstName: req.body.firstName,
     lastName: req.body.lastName,

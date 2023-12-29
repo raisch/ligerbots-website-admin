@@ -1,5 +1,4 @@
 const User = require('../models/User')
-const mongoose = require('mongoose')
 
 const { title, description, schools, roles, defaults } = require('../config')
 
@@ -12,8 +11,8 @@ exports.main = async (req, res) => {
   const messages = await req.flash('info')
   const locals = { title, description, utils }
 
-  let perPage = 12
-  let page = req.query.page || 1
+  const perPage = 12
+  const page = req.query.page || 1
 
   try {
     const users = await User.aggregate([{ $sort: { createdAt: -1 } }])
@@ -172,7 +171,7 @@ exports.find = async (req, res) => {
   }
 
   try {
-    let searchTerm = req.body.searchTerm
+    const searchTerm = req.body.searchTerm
     const searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9 ]/g, '')
 
     const users = await User.find({
