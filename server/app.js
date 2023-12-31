@@ -6,11 +6,12 @@ const methodOverride = require('method-override')
 const flash = require('connect-flash')
 
 const session = require('express-session')
-const connectDB = require('./config/db')
-
-const logger = require('./lib/logger')
 
 const cookieParser = require('cookie-parser')
+
+const connectDB = require('./config/db')
+const logger = require('./lib/logger')
+const { authenticate } = require('./middleware/auth')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -52,12 +53,16 @@ app.set('view engine', 'ejs')
 // Logging
 app.use(logger)
 
+app.use(authenticate)
+
 // Routes
 app.use('/', require('./routes/main'))
-app.use('/auth', require('./routes/auth'))
+
 app.use('/users', require('./routes/users'))
 app.use('/pages', require('./routes/pages'))
 app.use('/posts', require('./routes/posts'))
+
+app.use('/api/auth', require('./routes/auth'))
 
 // Handle 404
 app.get('*', (req, res) => {

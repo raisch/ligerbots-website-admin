@@ -11,8 +11,6 @@ exports.main = async (req, res) => {
     description
   }
 
-  // if we don't yet have a jwt token, redirect to the login page
-
   try {
     res.render('index', {
       locals,
@@ -22,6 +20,29 @@ exports.main = async (req, res) => {
     console.log(error)
   }
 }
+
+/** GET /login */
+exports.login = async (req, res) => {
+  const messages = await req.flash('info')
+  const locals = {
+    title,
+    description
+  }
+  res.render('login', { locals, messages })
+}
+
+/** GET /logout */
+exports.logout = async (req, res) => {
+  const messages = await req.flash('info')
+  const locals = {
+    title,
+    description
+  }
+  res.render('logout', { locals, messages })
+}
+
+/** GET /logout */
+// Handled by auth middleware
 
 /**
  * GET /about

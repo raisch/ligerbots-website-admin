@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 const JWT_SECRET = process.env.JWT_SECRET
 
-// Register a new user
+// Register a new user - BOOTSTRAP ONLY
 const register = async (req, res, next) => {
   const { username, password, firstName, lastName, role, type } = req.body
 
@@ -49,34 +49,32 @@ const login = async (req, res, next) => {
         error: 'User not found'
       })
     } else {
+      console.log(JSON.stringify({ user }, null, 2))
       // comparing given password with hashed password
       bcrypt.compare(password, user.password).then(function (result) {
-        if (result) {
-          const maxAge = 3 * 60 * 60
-          const token = jwt.sign(
-            {
-              id: user._id,
-              username,
-              role: user.role
-            },
-            JWT_SECRET,
-            {
-              expiresIn: maxAge
-            } // 3hrs in seconds
-          )
-          res.cookie('jwt', token, {
-            httpOnly: true,
-            maxAge: maxAge * 1000 // 3hrs in millis
-          })
-          res.status(201).json({
-            message: 'User logged in.',
-            user: user._id
-          })
-        } else {
+        if (!result) {
           res.status(400).json({
             message: 'User failed to log in.'
           })
+          return
         }
+
+        const maxAge = 3 * 60 * 60
+
+        const payload = { id: user._id, username: user.username, role: user.role }
+        const options = { expiresIn: maxAge } // 3hrs in seconds
+        const token = jwt.sign(payload, JWT_SECRET, options)
+
+        res.cookie('jwt', token, {
+          httpOnly: true,
+          maxAge: maxAge * 1000 // 3hrs in millis
+        })
+
+        res.status(201).json({
+          message: 'User logged in.',
+          user: user._id,
+          role: user.role
+        })
       })
     }
   } catch (error) {
@@ -87,9 +85,6 @@ const login = async (req, res, next) => {
   }
 }
 
-const logout = (req, res, next) => {
-  res.cookie('jwt', '', { maxAge: 1 })
-  res.redirect('/')
-}
+// const logout = (req, res, next) => { // handled by auth middleware
 
-module.exports = { register, login, logout }
+module.exports = { register, login }
