@@ -188,7 +188,7 @@ exports.publish = async (req, res) => {
   }
 
   pagePath += '.html'
-  console.log(`writing ${content.length} bytes to ${pagePath}: ${content}`)
+  console.log(`writing ${content.length} bytes to ${pagePath}:\n====\n${content}\n====`)
   // const writer = createWriteStream(pagePath)
 
   try {

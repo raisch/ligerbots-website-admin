@@ -22,15 +22,13 @@ const UserSchema = new Schema({
     type: String
   },
   fullName: {
-    type: String,
-    required: true
+    type: String
   },
   tel: {
     type: String
   },
   school: {
     type: String,
-    required: true,
     lowercase: true,
     enum: {
       values: schools,
@@ -40,7 +38,6 @@ const UserSchema = new Schema({
   },
   type: {
     type: String,
-    required: true,
     lowercase: true,
     enum: {
       values: types,
@@ -50,7 +47,6 @@ const UserSchema = new Schema({
   },
   role: {
     type: String,
-    required: true,
     lowercase: true,
     enum: {
       values: roles,

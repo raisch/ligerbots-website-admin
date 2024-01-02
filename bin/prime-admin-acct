@@ -1,0 +1,5 @@
+#!/bin/sh
+# Insert a default admin account with username: 'admin' and password: 'bongobongo' 
+mongosh \
+  --eval 'use ligerbots-admin' \
+  --eval 'db.users.insertOne({"username": "admin","password": "$2a$10$Xd0iW5DdZ0s20kIErqntA.z4ylnMASR.deqy8ntleRWsxrwtsQENK","school": "none","type": "other","role": "admin","active": true})'
