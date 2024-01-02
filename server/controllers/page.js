@@ -2,7 +2,7 @@ const path = require('node:path')
 const { writeFile } = require('node:fs/promises')
 
 const { mkdirp } = require('mkdirp')
-const markdown = require('markdown').markdown
+const marked = require('marked')
 const fm = require('front-matter')
 
 const { title, description, paths } = require('../config')
@@ -177,7 +177,7 @@ exports.publish = async (req, res) => {
 
   let content
   try {
-    content = markdown.toHTML(page.content)
+    content = marked.parse(page.content)
   } catch (err) {
     await req.flash(
       'error',
@@ -188,7 +188,7 @@ exports.publish = async (req, res) => {
   }
 
   pagePath += '.html'
-  console.log(`writing ${content.length} bytes to ${pagePath}`)
+  console.log(`writing ${content.length} bytes to ${pagePath}: ${content}`)
   // const writer = createWriteStream(pagePath)
 
   try {

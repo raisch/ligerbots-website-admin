@@ -136,5 +136,5 @@
   var simplemde = new SimpleMDE({
     element: document.getElementById("content"),
   });
-  simplemde.value(`<%= page.content %>`);
+  simplemde.value(`<%- page.content %>`);
 </script>
