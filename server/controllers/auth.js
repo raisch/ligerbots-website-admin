@@ -8,28 +8,29 @@ const JWT_SECRET = process.env.JWT_SECRET
 const register = async (req, res, next) => {
   const { username, password, firstName, lastName, role, type } = req.body
 
-  bcrypt.hash(password, 10).then(async hash => {
-    await User.create({
-      username,
-      password: hash,
-      firstName,
-      lastName,
-      type,
-      role
+  bcrypt.hash(password, 10)
+    .then(async hash => {
+      await User.create({
+        username,
+        password: hash,
+        firstName,
+        lastName,
+        type,
+        role
+      })
+        .then(user =>
+          res.status(200).json({
+            message: 'User created',
+            user
+          })
+        )
+        .catch(error =>
+          res.status(400).json({
+            message: 'User not created',
+            error: error.message
+          })
+        )
     })
-      .then(user =>
-        res.status(200).json({
-          message: 'User created',
-          user
-        })
-      )
-      .catch(error =>
-        res.status(400).json({
-          message: 'User not created',
-          error: error.message
-        })
-      )
-  })
 }
 
 // Login with an existing user

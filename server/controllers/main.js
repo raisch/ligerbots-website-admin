@@ -8,7 +8,8 @@ exports.main = async (req, res) => {
 
   const locals = {
     title,
-    description
+    description,
+    username: req?.user?.username || ''
   }
 
   try {

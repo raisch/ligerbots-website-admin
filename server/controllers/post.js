@@ -8,7 +8,11 @@ const view = 'posts'
  */
 exports.main = async (req, res) => {
   const messages = await req.flash('info')
-  const locals = { title, description }
+  const locals = {
+    title,
+    description,
+    username: req?.user?.username || ''
+  }
 
   try {
     res.render(`${view}/main`, {
@@ -27,7 +31,8 @@ exports.main = async (req, res) => {
 exports.new = async (req, res) => {
   const locals = {
     title: 'Add New Post',
-    description
+    description,
+    username: req?.user?.username || ''
   }
 
   res.render(`${view}/new`, locals)

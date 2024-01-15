@@ -9,7 +9,12 @@ const utils = require('../lib/utils')
  */
 exports.main = async (req, res) => {
   const messages = await req.flash('info')
-  const locals = { title, description, utils }
+  const locals = {
+    title,
+    description,
+    username: req?.user?.username || '',
+    utils
+  }
 
   const perPage = 12
   const page = req.query.page || 1
@@ -42,6 +47,7 @@ exports.new = async (req, res) => {
   const locals = {
     title: 'Add New User',
     description,
+    username: req?.user?.username || '',
     schools,
     roles,
     defaults,
@@ -86,6 +92,7 @@ exports.show = async (req, res) => {
     const locals = {
       title: 'Show User',
       description,
+      username: req?.user?.username || '',
       schools,
       roles,
       defaults,
@@ -110,6 +117,7 @@ exports.edit = async (req, res) => {
     const locals = {
       title: 'Edit User',
       description,
+      username: req?.user?.username || '',
       schools,
       roles,
       defaults,
@@ -167,7 +175,8 @@ exports.delete = async (req, res) => {
 exports.find = async (req, res) => {
   const locals = {
     title: 'Search user Data',
-    description
+    description,
+    username: req?.user?.username || ''
   }
 
   try {

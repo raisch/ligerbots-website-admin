@@ -18,7 +18,12 @@ const view = 'pages'
  */
 exports.main = async (req, res) => {
   const messages = await req.flash('info')
-  const locals = { title, description, utils }
+  const locals = {
+    title,
+    description,
+    username: req?.user?.username || '',
+    utils
+  }
 
   const perPage = 12
   const pageNum = req.query.page || 1
@@ -50,7 +55,8 @@ exports.main = async (req, res) => {
 exports.new = async (req, res) => {
   const locals = {
     title: 'Add New Page',
-    description
+    description,
+    username: req?.user?.username || ''
   }
 
   res.render(`${view}/new`, locals)
@@ -106,6 +112,7 @@ exports.show = async (req, res) => {
     const locals = {
       title: 'Show Page',
       description,
+      username: req?.user?.username || '',
       utils,
       page
     }
@@ -127,6 +134,7 @@ exports.edit = async (req, res) => {
     const locals = {
       title: 'Edit Page',
       description,
+      username: req?.user?.username || '',
       utils,
       page
     }
