@@ -13,6 +13,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <% if (locals?.username) { %>
   <form
     class="nav col-12 col-md-auto flex-fill mb-2 justify-content-center mb-md-0"
     role="search"
@@ -28,4 +29,5 @@
     />
   </form>
   <div style="padding:1em;color:white"><%= locals.username %></div>
+  <% } %>
 </header>

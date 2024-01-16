@@ -9,17 +9,7 @@
   </div>
 </div>
 
-<% messages.forEach(element => { %>
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <%= element %>
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="alert"
-    aria-label="Close"
-  ></button>
-</div>
-<% }) %>
+<%- include('../partials/messages') %>
 
 <div class="table-responsive">
   <table class="table table-striped table-sm">
