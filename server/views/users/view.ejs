@@ -1,7 +1,7 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h1 class="h2"><%= user.firstName %> <%= user.lastName %></h1>
+  <h1 class="h2"><%= user.firstname %> <%= user.lastname %></h1>
   <div class="btn-toolbar mb-2 mb-md 0">
     <div class="btn-group me-2">
       <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -26,14 +26,12 @@
             <a href="/users">Users</a>
           </li>
           <li class="breadcrumb-item active">
-            <%= user.firstName %> <%= user.lastName %>
+            <%= user.firstname %> <%= user.lastname %>
           </li>
         </ol>
       </nav>
     </div>
     <div class="col text-end fw-lighter">
-      Last Updated <%= new Date(user.updatedAt).toUTCString() %>
-      <br />
       UserId: <strong><%= user._id %></strong>
     </div>
   </div>
@@ -42,64 +40,85 @@
 <ul class="list-group">
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Name:</b></div>
-      <div class="col"><%= user.fullName %></div>
+      <div class="col" style="max-width: 200px"><b>Name:</b></div>
+      <div class="col"><%= user.fullname %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Username:</b></div>
+      <div class="col" style="max-width: 200px"><b>Username:</b></div>
       <div class="col"><%= user.username %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Tel:</b></div>
-      <div class="col"><%= user.tel %></div>
+      <div class="col" style="max-width: 200px;">Hashed Password:</div>
+      <div class="col"><%= user.password %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Email:</b></div>
-      <div class="col"><%= user.email %></div>
+      <div class="col" style="max-width: 200px"><b>Tel:</b></div>
+      <div class="col"><%= user.telnum %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>School:</b></div>
-      <div class="col"><%= utils.firstToUpper(user.school) %></div>
+      <div class="col" style="max-width: 200px"><b>Email:</b></div>
+      <div class="col"><%= user.emailaddr %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Role:</b></div>
-      <div class="col"><%= utils.firstToUpper(user.role) %></div>
+      <div class="col" style="max-width: 200px"><b>School:</b></div>
+      <div class="col"><%= user.school %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Notes:</b></div>
+      <div class="col" style="max-width: 200px"><b>Grade:</b></div>
+      <div class="col"><%= user.grade %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col" style="max-width: 200px"><b>Site Role:</b></div>
+      <div class="col"><%= user.role %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col" style="max-width: 200px"><b>User Type:</b></div>
+      <div class="col"><%= user.type %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col" style="max-width: 200px"><b>Notes:</b></div>
       <div class="col"><%= user.notes %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Date Created:</b></div>
-      <div class="col"><%= user.createdAt %></div>
+      <div class="col" style="max-width: 200px"><b>Created:</b></div>
+      <div class="col"><%= user.createdAt %> <% if (user.createdBy) { %> By: <%= user.createdBy %> <% } %></div>
     </div>
   </li>
 
   <li class="list-group-item">
     <div class="row">
-      <div class="col" style="max-width: 140px"><b>Date Modified:</b></div>
-      <div class="col"><%= user.updatedAt %></div>
+      <div class="col" style="max-width: 200px"><b>Last Modified:</b></div>
+      <div class="col"><%= user.updatedAt %><% if (user.updatedBy) { %> By: <%= user.updatedBy %> <% } %></div>
     </div>
   </li>
 </ul>

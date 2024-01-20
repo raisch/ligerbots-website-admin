@@ -11,6 +11,10 @@
 
 <%- include('../partials/messages') %>
 
+<% if(locals.DEBUGGING) { %>
+<pre><%- JSON.stringify({ locals, pageNum, numPages, maxPages }, null, 2) %></pre>
+<% } %>
+
 <div class="table-responsive">
   <table class="table table-striped table-sm">
     <thead>
@@ -22,18 +26,18 @@
     </thead>
 
     <tbody>
-      <% pages.forEach(element => { %>
+      <% records.forEach(record => { %>
       <tr class="align-middle">
         <td>
-          <a href="/_pages/<%= element.path %>.html" target="_blank"
-            ><%= element.path %></a
+          <a href="/_pages/<%= record.path %>.html" target="_blank"
+            ><%= record.path %></a
           >
         </td>
-        <td><%= element.author %></td>
+        <td><%= record.author %></td>
         <td class="text-end">
           <div class="d-flex flex-row justify-content-end gap-2">
             <a
-              href="/pages/<%= element._id %>"
+              href="/pages/<%= record._id %>"
               type="button"
               class="btn btn-primary btn-small"
             >
@@ -41,7 +45,7 @@
             </a>
 
             <a
-              href="/pages/edit/<%= element._id %>"
+              href="/pages/edit/<%= record._id %>"
               type="button"
               class="btn btn-warning btn-small"
             >
@@ -49,7 +53,7 @@
             </a>
 
             <form
-              action="/pages/<%= element._id %>/publish"
+              action="/pages/<%= record._id %>/publish"
               method="POST"
               class="position-relative"
             >
@@ -65,34 +69,44 @@
   </table>
 </div>
 
-<% if (pages.length > 0) { %>
-<nav aria-label="Dashboard Pagination">
-  <ul class="pagination justify-content-center mt-5">
-    <% if (current == 1) { %>
-    <li class="page-item disabled"><a href="#" class="page-link">First</a></li>
-    <% } else { %>
-    <li class="page-item"><a href="/?page=1" class="page-link">First</a></li>
-    <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
-    if(i !== 1) { %>
-    <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
-    <% } %> <% for(; i <= (Number(current) + 4) && i <= pages; i++ ) { %> <% if
-    (i == current) { %>
-    <li class="page-item disabled">
-      <a href="#" class="page-link"><%= i %></a>
-    </li>
-    <% } else { %>
-    <li class="page-item">
-      <a href="/?page=<%= i %>" class="page-link"><%= i %></a>
-    </li>
-    <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
-    <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
-    <% } %> <% } %> <% if (current == pages) { %>
-    <li class="page-item disabled"><a href="#" class="page-link">Last</a></li>
-    <% } else { %>
-    <li class="page-item">
-      <a href="/?page=<%= pages %>" class="page-link">Last</a>
-    </li>
-    <% } %>
-  </ul>
-</nav>
+<% if (numPages > 0) { %>
+  <nav aria-label="Dashboard Pagination">
+    <ul class="pagination justify-content-center mt-5">
+      <% if (pageNum === 1) { %>
+        <li class="page-item disabled"><a href="#" class="page-link">First</a></li>
+      <% } else { %>
+        <li class="page-item"><a href="/pages?page=1" class="page-link">First</a></li>
+      <% } %> 
+
+      <% var i = (pageNum > maxPages ? pageNum - maxPages - 1 : 1) %> 
+
+      <% if(i !== 1) { %>
+        <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+      <% } %>
+
+      <% for(; i <= pageNum + maxPages - 1 && i <= numPages; i++ ) { %> 
+        <% if (i === pageNum) { %>
+          <li class="page-item disabled">
+            <a href="#" class="page-link"><%= i %></a>
+          </li>
+        <% } else { %>
+        <li class="page-item">
+          <a href="/pages?page=<%= i %>" class="page-link"><%= i %></a>
+        </li>
+        <% } %> 
+        <% if (i === pageNum + maxPages - 1 && i < numPages) { %>
+          <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+        <% } %> 
+      <% } %> 
+
+      <% if (pageNum === numPages) { %>
+      <li class="page-item disabled"><a href="#" class="page-link">Last</a></li>
+      <% } else { %>
+      <li class="page-item">
+        <a href="/pages?page=<%= numPages %>" class="page-link">Last</a>
+      </li>
+      <% } %>
+
+    </ul>
+  </nav>
 <% } %>

@@ -1,7 +1,7 @@
 <div
   class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
 >
-  <h1 class="h2">Editing: <%= user.firstName %> <%= user.lastName %></h1>
+  <h1 class="h2">Editing: <%= user.fullname %></h1>
   <div class="btn-toolbar mb-2 mb-md 0">
     <div class="btn-group me-2">
       <button class="btn btn-sm btn-outline-secondary">?</button>
@@ -21,13 +21,14 @@
             <a href="/users">Users</a>
           </li>
           <li class="breadcrumb-item active">
-            <%= user.firstName %> <%= user.lastName %>
+            <%= user.fullname %>
           </li>
         </ol>
       </nav>
     </div>
     <div class="col text-end fw-lighter">
-      <b>Last Updated: <%= new Date(user.updatedAt).toUTCString() %></b>
+      <b>Last Updated: <%= user.updatedAt %> By: <%= user.updatedBy || user.createdBy %></b>
+      <br/>
       <b>UserId:</b> <%= user._id %>
     </div>
   </div>
@@ -36,26 +37,56 @@
 <form action="/users/<%= user._id %>?_method=PUT" method="POST">
   <div class="row form-group mb-4">
     <div class="col">
-      <label for="firstName">First Name</label>
+      <label for="username">Username</label>
       <input
         type="text"
         class="form-control"
-        id="firstName"
-        name="firstName"
-        value="<%= user.firstName %>"
+        id="username"
+        name="username"
+        value="<%= user.username %>"
+        placeholder="If blank, username will be email address."
+      />
+    </div>
+
+    <div class="col">
+      <label for="password">
+        Password (8 characters min.)
+        <span style="font-size:small;color:green">
+        If set, this will <span style="color:red;font-weight: bold;font-style: italic;">OVERWRITE</span> the existing password.
+        </span>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="password"
+        name="password"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="firstname">First Name (required)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstname"
+        name="firstname"
+        value="<%= user.firstname %>"
         placeholder="First Name"
         required
       />
     </div>
 
     <div class="col">
-      <label for="lastName">Last Name</label>
+      <label for="lastName">Last Name (required)</label>
       <input
         type="text"
         class="form-control"
-        id="lastName"
-        name="lastName"
-        value="<%= user.lastName %>"
+        id="lastname"
+        name="lastname"
+        value="<%= user.lastname %>"
         placeholder="Last Name"
         required
       />
@@ -64,27 +95,27 @@
 
   <div class="row form-group mb-4">
     <div class="col">
-      <label for="tel">Telephone</label>
+      <label for="telnum">Telephone (required)</label>
       <input
         type="text"
         class="form-control"
-        id="tel"
-        name="tel"
-        value="<%= user.tel %>"
+        id="telnum"
+        name="telnum"
+        value="<%= user.telnum %>"
         placeholder="Telephone"
         required
       />
     </div>
 
     <div class="col">
-      <label for="email">Email</label>
+      <label for="emailaddr">Email (required)</label>
       <input
         type="text"
         class="form-control"
-        id="email"
-        name="email"
-        value="<%= user.email %>"
-        placeholder="Email"
+        id="emailaddr"
+        name="emailaddr"
+        value="<%= user.emailaddr %>"
+        placeholder="Email Address"
         required
       />
     </div>
@@ -92,7 +123,7 @@
 
   <div class="row form-group mb-4">
     <div class="col">
-      <label>School:</label>
+      <label>School (required):</label>
       <% schools.forEach(school => { %>
       <div class="form-check-inline">
         <input class="form-check-input" type="radio" name="school"
@@ -108,32 +139,77 @@
 
   <div class="row form-group mb-4">
     <div class="col">
-      <label>Role:</label>
-      <% roles.forEach(role => { %>
-      <div class="form-check-inline">
-        <input class="form-check-input" type="radio" name="role"
-        id="<%=role%>-role" value="<%=role%>" <% if(role === user.role) { %>
-        checked <% } %> />
-        <label class="form-check-label" for="<%=role%>-role">
-          <%= utils.firstToUpper(role) %></label
-        >
+      <label for="grade">Grade (required):</label>
+      <% grades.forEach(grade => { %>
+        <div class="form-check-inline">
+        <input 
+          class="form-check-input" 
+          type="radio" 
+          name="grade"
+          id="grade-<%=grade%>" 
+          value="<%=grade%>"
+          <% if(grade === user.grade) { %> checked <% } %> 
+        />
+        <label class="form-check-label" for="grade-<%=grade%>">
+          <%= grade %>
+        </label>
       </div>
       <% }) %>
     </div>
   </div>
 
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label>Site Role (required):</label>
+      <% roles.forEach(role => { %>
+        <div class="form-check-inline">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            name="role"
+            id="<%=role%>-role" 
+            value="<%=role%>"
+            <% if(role === user.role) { %> checked <% } %> 
+          />
+          <label class="form-check-label" for="<%=role%>-role">
+            <%= utils.firstToUpper(role) %>
+          </label>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label>User Type (required):</label>
+      <% types.forEach(type => { %>
+        <div class="form-check-inline">
+          <input 
+            class="form-check-input"
+            type="radio"
+            name="type"
+            id="<%=type%>-type" 
+            value="<%=type%>" <% if(type === user.type) { %> checked <% } %> 
+          />
+          <label class="form-check-label" for="<%=type%>-type">
+            <%= utils.firstToUpper(type) %>
+          </label>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
   <div class="form-group mb-4">
-    <label for="details">Notes</label>
+    <label for="note">Notes</label>
     <textarea
       class="form-control"
-      name="details"
-      id="details"
+      name="note"
+      id="notes"
       cols="30"
       rows="12"
       placeholder="Notes"
-    >
-<%= user.details %></textarea
-    >
+    ><%= user.notes %></textarea>
   </div>
 
   <div class="form-group mb-4">

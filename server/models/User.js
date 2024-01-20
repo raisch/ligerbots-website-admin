@@ -1,31 +1,37 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const { _ } = require('../lib/utils')
-const { schools, roles, types } = require('../config')
+const { _, createHashedPassword } = require('../lib/utils')
+
+const { schools, grades, roles, types } = require('../config')
 
 const UserSchema = new Schema({
   username: {
     type: String,
-    unique: true,
-    required: true
+    unique: true
   },
   password: {
     type: String,
     minlength: 8,
     required: true
   },
-  firstName: {
+  firstname: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
+  },
+  fullname: {
     type: String
   },
-  lastName: {
+  emailaddr: {
     type: String
   },
-  fullName: {
-    type: String
-  },
-  tel: {
-    type: String
+  telnum: {
+    type: String,
+    default: '000-000-0000'
   },
   school: {
     type: String,
@@ -33,6 +39,14 @@ const UserSchema = new Schema({
     enum: {
       values: schools,
       message: `School must be one of ${schools}`
+    },
+    default: 'none'
+  },
+  grade: {
+    type: String,
+    enum: {
+      values: grades,
+      message: `Grade must be one of ${grades}`
     },
     default: 'none'
   },
@@ -61,20 +75,40 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true
   },
-  createdAt: {
-    type: Date,
-    default: Date.now()
+  createdBy: {
+    type: String
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now()
+  updatedBy: {
+    type: String
   }
+}, {
+  timestamps: true // adds createdAt, updatedAt
 })
 
-UserSchema.pre('validate', function (next) {
-  if (_.isNonEmptyString(this.firstName) && _.isNonEmptyString(this.lastName)) {
-    this.fullName = `${this.firstName} ${this.lastName}`
+UserSchema.pre('validate', async function (next) {
+  if (!(_.isNonEmptyString(this.username) || _.isNonEmptyString(this.emailaddr))) {
+    throw new Error('User requires either a username or an email address')
   }
+
+  // if username is blank but emailaddr is not, set username to emailaddr
+  if (!_.isNonEmptyString(this.username) && _.isNonEmptyString(this.emailaddr)) {
+    this.username = this.emailaddr
+  }
+
+  // if firstname and lastname are not blank, set fullname
+  if (_.isNonEmptyString(this.firstname) && _.isNonEmptyString(this.lastname)) {
+    this.fullname = `${this.firstname} ${this.lastname}`
+  }
+
+  if (_.isNonEmptyString(this.password)) {
+    console.log(`hashing password: ${this.password}`)
+    try {
+      this.password = createHashedPassword(this.password)
+    } catch (err) {
+      throw new Error(`failed to hash password: ${err}`)
+    }
+  }
+
   next()
 })
 

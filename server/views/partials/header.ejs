@@ -14,20 +14,20 @@
   </button>
 
   <% if (locals?.username) { %>
-  <form
-    class="nav col-12 col-md-auto flex-fill mb-2 justify-content-center mb-md-0"
-    role="search"
-    method="POST"
-    action="/search"
-  >
-    <input
-      type="search"
-      name="searchTerm"
-      class="form-control form-control-dark w-100 rounded-0 border-0"
-      placeholder="Search..."
-      aria-label="Search"
-    />
-  </form>
-  <div style="padding:1em;color:white"><%= locals.username %></div>
+    <form
+      class="nav col-12 col-md-auto flex-fill mb-2 justify-content-center mb-md-0"
+      role="search"
+      method="POST"
+      action="/search"
+    >
+      <input
+        type="search"
+        name="searchTerm"
+        class="form-control form-control-dark w-100 rounded-0 border-0"
+        placeholder="Search..."
+        aria-label="Search"
+      />
+    </form>
+    <div style="padding:1em;color:white"><a href="/users/<%= locals?.userid %>"><%= locals?.username %></a></div>
   <% } %>
 </header>

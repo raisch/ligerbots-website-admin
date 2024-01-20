@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+const path = require('node:path')
+
+require('dotenv').config({
+  path: path.resolve(__dirname, '../server/.env')
+})
+
+const connectDB = require('../server/config/db')
+
+const User = require('../server/models/User')
+
+const userData = {
+  username: 'raisch',
+  password: 'p4ssw0rd',
+  firstname: 'Rob',
+  lastname: 'Raisch',
+  emailaddr: 'raisch@gmail.com',
+  telnum: '617-331-0222',
+  role: 'admin',
+  notes: `autocreated / ${new Date()}`,
+  createdBy: '/bin/tt'
+}
+
+;(async function () {
+  await connectDB()
+
+  let result
+  try {
+    result = await User.create(userData)
+  } catch (err) {
+    console.log(`failed to create user: ${err}`)
+    process.exit(-1)
+  }
+  console.log(`result: ${JSON.stringify(result, null, 2)}`)
+  process.exit(0)
+})()

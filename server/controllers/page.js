@@ -5,7 +5,7 @@ const { mkdirp } = require('mkdirp')
 const marked = require('marked')
 const fm = require('front-matter')
 
-const { title, description, paths } = require('../config')
+const { title, description, paths, DEBUGGING } = require('../config')
 
 const Page = require('../models/Page')
 
@@ -17,30 +17,42 @@ const view = 'pages'
  * GET /pages
  */
 exports.main = async (req, res) => {
+  const perPage = 12
+  const pageNum = Number(req.query.page) || 1
+  const maxPages = 5
+
   const messages = await req.flash('info')
+
   const locals = {
     title,
     description,
+    userid: req?.user?._id || '',
     username: req?.user?.username || '',
-    utils
+    messages,
+    perPage,
+    pageNum,
+    maxPages,
+    utils,
+    DEBUGGING
   }
 
-  const perPage = 12
-  const pageNum = req.query.page || 1
-
   try {
-    const pages = await Page.aggregate([{ $sort: { path: 1 } }])
+    const records = await Page.aggregate([{ $sort: { path: 1 } }])
       .skip(perPage * pageNum - perPage)
       .limit(perPage)
       .exec()
 
     const count = await Page.countDocuments({})
+    locals.totalRecords = count
+    locals.currentPage = pageNum
+    locals.numPages = Math.ceil(count / perPage)
 
     res.render('pages/main', {
       locals,
-      pages,
-      current: pageNum,
+      records,
+      pageNum,
       numPages: Math.ceil(count / perPage),
+      maxPages,
       messages
     })
   } catch (error) {

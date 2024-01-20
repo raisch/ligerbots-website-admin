@@ -26,12 +26,39 @@
 <form action="/users" method="POST">
   <div class="row form-group mb-4">
     <div class="col">
-      <label for="firstName">First Name</label>
+      <label for="username">Username</label>
       <input
         type="text"
         class="form-control"
-        id="firstName"
-        name="firstName"
+        id="username"
+        name="username"
+        value=""
+        placeholder="If blank, username will be email address."
+      />
+    </div>
+
+    <div class="col">
+      <label for="password">Password (8 characters min.)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="password"
+        name="password"
+        value=""
+        placeholder="Will be hashed when saved."
+        required
+      />
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="firstname">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstname"
+        name="firstname"
         value=""
         placeholder="First Name"
         required
@@ -39,12 +66,12 @@
     </div>
 
     <div class="col">
-      <label for="lastName">Last Name</label>
+      <label for="lastname">Last Name</label>
       <input
         type="text"
         class="form-control"
-        id="lastName"
-        name="lastName"
+        id="lastname"
+        name="lastname"
         value=""
         placeholder="Last Name"
         required
@@ -54,27 +81,27 @@
 
   <div class="row form-group mb-4">
     <div class="col">
-      <label for="tel">Telephone</label>
+      <label for="telnum">Telephone</label>
       <input
         type="text"
         class="form-control"
-        id="tel"
-        name="tel"
+        id="telnum"
+        name="telnum"
         value=""
-        placeholder="Telephone"
+        placeholder="Telephone Number"
         required
       />
     </div>
 
     <div class="col">
-      <label for="email">Email</label>
+      <label for="emailaddr">Email</label>
       <input
         type="text"
         class="form-control"
-        id="email"
-        name="email"
+        id="emailaddr"
+        name="emailaddr"
         value=""
-        placeholder="Email"
+        placeholder="Email Address"
         required
       />
     </div>
@@ -84,28 +111,55 @@
     <div class="col">
       <label>School:</label>
       <% schools.forEach(school => { %>
-      <div class="form-check-inline">
-        <input class="form-check-input" type="radio" name="school"
-        id="<%=school%>-school" value="<%=school%>" <% if(school ===
-        defaults.school) { %> checked <% } %> />
-        <label class="form-check-label" for="<%=school%>-school">
-          <%= utils.firstToUpper(school) %></label
-        >
-      </div>
+        <div class="form-check-inline">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            name="school"
+            id="<%=school%>-school" 
+            value="<%=school%>" 
+            <% if(school === defaults.school) { %> checked <% } %> 
+          />
+          <label class="form-check-label" for="<%=school%>-school">
+            <%= school %>
+          </label
+          >
+        </div>
       <% }) %>
     </div>
   </div>
 
   <div class="row form-group mb-4">
     <div class="col">
-      <label>Role:</label>
+      <label>Grade:</label>
+      <% grades.forEach(grade => { %>
+        <div class="form-check-inline">
+          <input 
+            class="form-check-input" 
+            type="radio" 
+            name="grade"
+            id="grade-<%=grade%>" 
+            value="<%=grade%>" 
+            <% if(grade === defaults.grade) { %> checked <% } %> 
+          />
+          <label class="form-check-label" for="grade-<%=grade%>">
+            <%= grade %>
+          </label>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label>Site Role:</label>
       <% roles.forEach(role => { %>
       <div class="form-check-inline">
         <input class="form-check-input" type="radio" name="role"
         id="<%=role%>-role" value="<%=role%>" <% if(role === defaults.role) { %>
         checked <% } %> />
         <label class="form-check-label" for="<%=role%>-role">
-          <%= utils.firstToUpper(role) %></label
+          <%= role %></label
         >
       </div>
       <% }) %>

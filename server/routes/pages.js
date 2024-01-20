@@ -8,6 +8,7 @@ const controller = require('../controllers/page')
  * GET /pages - list
  *
  * GET /pages/:id - show
+ *
  * DELETE /pages/:id
  *
  * GET /pages/new - new form
@@ -17,6 +18,8 @@ const controller = require('../controllers/page')
  * PUT /pages/:id
  *
  * POST /pages/search
+ *
+ * GET /pages/_/:id
  *
  */
 
@@ -29,7 +32,7 @@ router.get('/new', controller.new)
 
 router.post('/:id/publish', controller.publish)
 
-// GET pages/:id - show user
+// GET pages/:id - show page
 router.get('/:id', controller.show)
 
 // POST /pages - save user
@@ -45,5 +48,7 @@ router.put('/:id', controller.update)
 router.get('/edit/:id', controller.edit)
 
 // router.post('/search', controller.find)
+
+router.get('_/:id')
 
 module.exports = router
