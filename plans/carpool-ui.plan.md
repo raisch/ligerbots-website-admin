@@ -33,16 +33,16 @@ flowchart TB
 **Wireframe:**
 
 | Search Events                                      |
-|---------------------------------------------------|
-| [🔍 Search events by name or date...]             |
+|----------------------------------------------------|
+| [🔍 Search events by name or date...]              |
 |                                                   |
 | **Event Cards Grid**                              |
-| ┌─────────────────┐ ┌─────────────────┐          |
-|   📅 Event Name 1      📅 Event Name 2            |
-|   Date: 2024-03-15     Date: 2024-03-20           |
-|   📍 Location A        📍 Location B              |
-|   [View Trips →]       [View Trips →]             |
-| └─────────────────┘ └─────────────────┘          |
+| ┌─────────────────┐   ┌─────────────────┐          |
+|   📅 Event Name 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📅 Event Name 2            |
+|   Date: 2024-03-15      Date: 2024-03-20           |
+|   📍 Location A         📍 Location B              |
+|   [View Trips →]        [View Trips →]             |
+| └─────────────────┘   └─────────────────┘          |
 | ┌─────────────────┐ ┌─────────────────┐          |
 | │ 📅 Event Name 3  │ │ 📅 Event Name 4  │          |
 | │ Date: 2024-03-25 │ │ Date: 2024-04-01 │          |
