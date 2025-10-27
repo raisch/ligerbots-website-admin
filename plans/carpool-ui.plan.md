@@ -38,10 +38,10 @@ flowchart TB
 |                                                   |
 | **Event Cards Grid**                              |
 | ┌─────────────────┐ ┌─────────────────┐          |
-| │ 📅 Event Name 1  │ │ 📅 Event Name 2  │          |
-| │ Date: 2024-03-15 │ │ Date: 2024-03-20 │          |
-| │ 📍 Location A    │ │ 📍 Location B    │          |
-| │ [View Trips →]   │ │ [View Trips →]   │          |
+| \│ 📅 Event Name 1  \│ \│ 📅 Event Name 2  \│          |
+| \│ Date: 2024-03-15 \│ \│ Date: 2024-03-20 \│          |
+| \│ 📍 Location A    \│ \│ 📍 Location B    \│          |
+| \│ [View Trips →]   \│ \│ [View Trips →]   \│          |
 | └─────────────────┘ └─────────────────┘          |
 | ┌─────────────────┐ ┌─────────────────┐          |
 | │ 📅 Event Name 3  │ │ 📅 Event Name 4  │          |
