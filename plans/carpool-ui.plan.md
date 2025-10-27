@@ -32,7 +32,6 @@ flowchart TB
 
 **Wireframe:**
 
-<div style="border:1px solid #000; padding:10px; width:400px;font-family:monospace;">
 | Search Events                                      |
 |---------------------------------------------------|
 | [🔍 Search events by name or date...]             |
@@ -50,7 +49,6 @@ flowchart TB
 | │ 📍 Location C    │ │ 📍 Location D    │          |
 | │ [View Trips →]   │ │ [View Trips →]   │          |
 | └─────────────────┘ └─────────────────┘          |
-</div>
 
 
 
