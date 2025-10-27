@@ -25,9 +25,9 @@ All componentry will use [shadcn-svelte](https://ui.shadcn.com/docs/components) 
 ```mermaid
 flowchart TB
   search([Search Events...])
-  card1(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips"]])
-  card2(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips"]])
-  card3(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips"]])
+  card1(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
+  card2(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
+  card3(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
   search --> card1
   search --> card2
   search --> card3
