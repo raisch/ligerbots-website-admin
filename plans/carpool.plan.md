@@ -14,16 +14,16 @@
 
 ## Directus Collections
 
-- event - Represents an event that requires carpools (e.g., a competition or meeting)
-- event_trips - Associates trips with a specific event
-- destination_trip - Represents a trip to an event destination
-- destination_trip_rides - Represents a ride associated with a destination trip
-- return_trip - Represents a trip returning from an event
-- return_trip_rides - Represents a ride associated with a return trip
-- ride - Represents an individual ride, including driver, vehicle, and passenger details
-- ride_driver - Contains driver information for a ride
-- trip_ride - Associates a ride with a trip (either destination or return)
-- trip_ride_riders - Represents a passenger/rider for a specific trip ride
+- event - describes events requiring carpools
+- event_trips - describes trips associated with events
+- destination_trip - describes trips to event destinations
+- destination_trip_rides - describes rides associated with destination trips
+- return_trip - describes trips returning from events
+- return_trip_rides - describes rides associated with return trips
+- ride_driver - describes driver information for each ride
+- ride - describes individual rides with driver, vehicle, and passenger details
+- trip_ride - describes the association between trips and rides
+- trip_ride_riders - describes passengers/riders associated with specific trip rides
 
 GraphQL will be used to interact with these collections for creating, reading, updating, and deleting carpool data.
 
@@ -31,16 +31,15 @@ GraphQL will be used to interact with these collections for creating, reading, u
 
 ### Queries
 
-- Fetch events and their details
-- Fetch event trips, including event info
-- Fetch destination trips, including rides and ride details
-- Fetch destination trip rides, including ride details
+- Fetch carpools for a specific event
+- Retrieve carpool details including driver and participants
+- List available carpools with filtering options
 
 ### Mutations
 
-- Create new event, event trip, destination trip, or destination trip ride entries
-- Update existing event, event trip, destination trip, or destination trip ride information
-- Delete entries as needed
+- Create new carpool entries
+- Update existing carpool information
+- Delete carpools as needed
 
 ## Milestones
 
@@ -104,16 +103,9 @@ GraphQL will be used to interact with these collections for creating, reading, u
 
 ### Data Models in Directus
 
-- **event**: id, status, start_date, end_date, name, location, publish_on, auto_publish, description
-- **event_trips**: id, event_id, destination_trip, return_trip
-- **destination_trip**: id, status, destination, departs_from, departs_on, departs_at, rides, arrives_at
-- **destination_trip_rides**: id, destination_trip_id, ride
-- **return_trip**: id, status, destination, departs_from, departs_on, departs_at, rides, arrives_at
-- **return_trip_rides**: id, return_trip_id, ride
-- **ride**: id, driver, vehicle, passengers
-- **ride_driver**: id, ride_id, driver_name, driver_contact
-- **trip_ride**: id, ride_id, trip_id
-- **trip_ride_riders**: id, trip_ride_id, passenger_name, passenger_contact
+- **Carpools**: id, event_id, driver_name, driver_contact, departure_time, departure_location, available_seats, notes
+- **Events**: id, name, date, location, description
+- **Carpool_Participants**: id, carpool_id, participant_name, participant_contact, pickup_location
 
 ### GraphQL Integration
 

@@ -109,3 +109,6 @@ dist
 ## VSCODE CONFIGS
 .vscode/*
 .github/*
+
+## temp files
+tmp/
