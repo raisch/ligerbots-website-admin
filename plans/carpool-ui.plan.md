@@ -1,10 +1,13 @@
 
 # Carpool UI Plan
 
-The carpool UI will be built to facilitate the creation and management of carpools for events using Directus as the backend. The UI will leverage Directus GraphQL API to interact with the carpool data models defined in `carpool.plan.md`.
+The carpool UI will be built to facilitate the creation and management of
+  carpools for events using Directus as the backend. The UI will leverage
+  Directus GraphQL API to interact with the carpool data models defined in
+  `carpool.plan.md`.
 
-All componentry will use [shadcn-svelte](https://ui.shadcn.com/docs/components) for a modern, accessible, and consistent design system.
-
+Components will use [shadcn-svelte](https://ui.shadcn.com/docs/components) for
+a modern, accessible, and consistent design system.
 
 ## UI Components & Wireframes
 
@@ -20,37 +23,20 @@ All componentry will use [shadcn-svelte](https://ui.shadcn.com/docs/components) 
   - Search/filter events by name/date.
   - Clicking a card navigates to the Trip List Page for that event.
 
+
 **Wireframe:**
 
-```mermaid
-flowchart TB
-  search([Search Events...])
-  card1(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
-  card2(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
-  card3(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
+```text
+---------------------------------------------------
+|  [Search Events...]                             |
+---------------------------------------------------
+|  [Event Card]   [Event Card]   [Event Card]     |
+|  Name           Name           Name             |
+|  📅 Date        📅 Date        📅 Date           |
+|  📍 Location    📍 Location    📍 Location       |
+|  [View Trips]   [View Trips]   [View Trips]     |
+---------------------------------------------------
 ```
-
-**Wireframe:**
-
-| Search Events                                      |
-|----------------------------------------------------|
-| [🔍 Search events by name or date...]              |
-|                                                   |
-| **Event Cards Grid**                              |
-| ┌─────────────────┐   ┌─────────────────┐          |
-|   📅 Event Name 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📅 Event Name 2            |
-|   Date: 2024-03-15      Date: 2024-03-20           |
-|   📍 Location A         📍 Location B              |
-|   [View Trips →]        [View Trips →]             |
-| └─────────────────┘   └─────────────────┘          |
-| ┌─────────────────┐ ┌─────────────────┐          |
-| │ 📅 Event Name 3  │ │ 📅 Event Name 4  │          |
-| │ Date: 2024-03-25 │ │ Date: 2024-04-01 │          |
-| │ 📍 Location C    │ │ 📍 Location D    │          |
-| │ [View Trips →]   │ │ [View Trips →]   │          |
-| └─────────────────┘ └─────────────────┘          |
-
-
 
 ### 2. Trip List Page
 
@@ -68,13 +54,13 @@ flowchart TB
 
 ```text
 ---------------------------------------------------
-| Destination Trips      | Return Trips            |
-| [ ] No ride needed     | [ ] No ride needed      |
+| 🚗 Destination Trips   | 🏁 Return Trips         |
+| [ ] No ride needed    | [ ] No ride needed      |
 | [Trip Card]           | [Trip Card]             |
 | [View Details]        | [View Details]          |
 | ...                   | ...                     |
 ---------------------------------------------------
-```text
+```
 
 
 ### 3. Trip Detail Modal Popup
@@ -92,38 +78,35 @@ flowchart TB
 ```text
 ---------------- Trip Details (Modal) ----------------
 | Trip: [Destination/Return]                        |
-| Date/Time: [..]                                   |
+| 🕒 Date/Time: [..]                                |
 |                                                   |
 | Rides:                                            |
-| [Ride Card]  Driver: [Avatar] Name                |
-|   Vehicle: [..]                                   |
-|   Passengers: [Avatar] [Avatar] ...               |
-|   Free Seats: [2]                                 |
+| [Ride Card]  👤 Driver: [Avatar] Name             |
+|   🚗 Vehicle: [..]                                |
+|   🧑‍🤝‍🧑 Passengers: [Avatar] [Avatar] ...            |
+|   🪑 Free Seats: [2]                              |
 |   [Join Ride]                                     |
 | ...                                               |
 -----------------------------------------------------
 ```
-
-
 ### 4. Join Ride Form Modal Popup
 
 - **Description:** Allows users to join a ride by submitting their info.
 - **shadcn-svelte Components:**
   - Dialog, Form, Input, Button, Alert (for errors)
 - **Functionality:**
-  - Display a form with fields: Name, Contact Info, Pickup Location (optional).
   - Validate required fields.
   - Submit form via GraphQL mutation to join the ride.
   - Show success or error message.
 
 **Wireframe:**
 
-```
+```text
 ------------- Join Ride (Modal) -------------
-| Name:  [___________]                      |
-| Contact: [___________]                    |
-| Pickup Location: [___________]            |
-| [Join Ride]                               |
-| [Cancel]                                  |
+| 👤 Name:  [___________]                    |
+| ☎️ Contact: [___________]                  |
+| 📍 Pickup Location: [___________]          |
+| [Join Ride]                                |
+| [Cancel]                                   |
 ---------------------------------------------
 ```
