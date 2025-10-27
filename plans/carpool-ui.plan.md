@@ -28,9 +28,6 @@ flowchart TB
   card1(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
   card2(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
   card3(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
-  search --> card1
-  search --> card2
-  search --> card3
 ```
 
 ### 2. Trip List Page
