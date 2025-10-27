@@ -1,1 +1,3 @@
+# TODOS
+
 - in views/partials/header.ejs, change styling for username div to CSS
