@@ -30,6 +30,30 @@ flowchart TB
   card3(["Event Card<br/>Name<br/>Date<br/>Location<br/>[View Trips]"])
 ```
 
+**Wireframe:**
+
+<div style="border:1px solid #000; padding:10px; width:400px;font-family:monospace;">
+| Search Events                                      |
+|---------------------------------------------------|
+| [🔍 Search events by name or date...]             |
+|                                                   |
+| **Event Cards Grid**                              |
+| ┌─────────────────┐ ┌─────────────────┐          |
+| │ 📅 Event Name 1  │ │ 📅 Event Name 2  │          |
+| │ Date: 2024-03-15 │ │ Date: 2024-03-20 │          |
+| │ 📍 Location A    │ │ 📍 Location B    │          |
+| │ [View Trips →]   │ │ [View Trips →]   │          |
+| └─────────────────┘ └─────────────────┘          |
+| ┌─────────────────┐ ┌─────────────────┐          |
+| │ 📅 Event Name 3  │ │ 📅 Event Name 4  │          |
+| │ Date: 2024-03-25 │ │ Date: 2024-04-01 │          |
+| │ 📍 Location C    │ │ 📍 Location D    │          |
+| │ [View Trips →]   │ │ [View Trips →]   │          |
+| └─────────────────┘ └─────────────────┘          |
+</div>
+
+
+
 ### 2. Trip List Page
 
 - **Description:** Displays trips (destination and return) for a selected event.
