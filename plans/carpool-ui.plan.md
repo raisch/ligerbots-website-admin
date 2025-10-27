@@ -31,6 +31,7 @@ flowchart TB
   search --> card1
   search --> card2
   search --> card3
+```
 
 ### 2. Trip List Page
 
